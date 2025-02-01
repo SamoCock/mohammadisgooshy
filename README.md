@@ -2,6 +2,10 @@
 
 A modern, responsive web-based schedule application that looks and works like a native app. This application allows users to manage their tasks and schedule with an intuitive interface.
 
+## Live Demo
+
+Visit the live application: [Schedule Web App](https://samocock.github.io/mohammadisgooshy/)
+
 ## Features
 
 - Add, complete, and delete tasks
