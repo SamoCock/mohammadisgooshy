@@ -6,8 +6,40 @@ const cancelBtn = document.getElementById('cancelBtn');
 const tasksList = document.getElementById('tasksList');
 const filterBtns = document.querySelectorAll('.filter-btn');
 
+// Predefined tasks
+const defaultTasks = [
+    {
+        id: 1,
+        title: "Morning Skincare Routine ✨",
+        date: "2024-02-01T08:00",
+        description: "Cleanse, tone, moisturize, and sunscreen",
+        completed: false
+    },
+    {
+        id: 2,
+        title: "Study Session 📚",
+        date: "2024-02-01T10:00",
+        description: "Review notes and complete assignments",
+        completed: false
+    },
+    {
+        id: 3,
+        title: "Afternoon Tea Break 🫖",
+        date: "2024-02-01T15:00",
+        description: "Take a relaxing break with tea and snacks",
+        completed: false
+    },
+    {
+        id: 4,
+        title: "Evening Walk 🌸",
+        date: "2024-02-01T18:00",
+        description: "30-minute walk in the park",
+        completed: false
+    }
+];
+
 // State
-let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+let tasks = JSON.parse(localStorage.getItem('tasks')) || defaultTasks;
 
 // Event Listeners
 addTaskBtn.addEventListener('click', () => {
@@ -58,7 +90,6 @@ function saveTasks() {
 function formatDate(dateString) {
     const options = { 
         weekday: 'long', 
-        year: 'numeric', 
         month: 'long', 
         day: 'numeric',
         hour: '2-digit',
@@ -76,27 +107,18 @@ function renderTasks(filter = 'all') {
             const taskDate = new Date(task.date).setHours(0, 0, 0, 0);
             return taskDate === today;
         });
-    } else if (filter === 'week') {
-        const today = new Date();
-        const weekStart = new Date(today.setDate(today.getDate() - today.getDay()));
-        const weekEnd = new Date(today.setDate(today.getDate() + 6));
-        
-        filteredTasks = tasks.filter(task => {
-            const taskDate = new Date(task.date);
-            return taskDate >= weekStart && taskDate <= weekEnd;
-        });
     }
     
     tasksList.innerHTML = filteredTasks
         .sort((a, b) => new Date(a.date) - new Date(b.date))
         .map(task => `
-            <div class="task-item" data-id="${task.id}">
+            <div class="task-item ${task.completed ? 'completed' : ''}" data-id="${task.id}">
                 <h3>${task.title}</h3>
                 <div class="task-date">${formatDate(task.date)}</div>
                 <div class="task-description">${task.description}</div>
                 <div class="task-actions">
-                    <button onclick="toggleTask(${task.id})" class="toggle-btn">
-                        ${task.completed ? '✓ Completed' : 'Mark Complete'}
+                    <button onclick="toggleTask(${task.id})" class="toggle-btn ${task.completed ? 'completed' : ''}">
+                        ${task.completed ? '✓ Done' : 'Mark Done'}
                     </button>
                     <button onclick="deleteTask(${task.id})" class="delete-btn">
                         Delete
