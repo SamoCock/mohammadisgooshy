@@ -1,8 +1,4 @@
 // DOM Elements
-const addTaskBtn = document.getElementById('addTaskBtn');
-const addTaskModal = document.getElementById('addTaskModal');
-const addTaskForm = document.getElementById('addTaskForm');
-const cancelBtn = document.getElementById('cancelBtn');
 const tasksList = document.getElementById('tasksList');
 const filterBtns = document.querySelectorAll('.filter-btn');
 
@@ -42,38 +38,6 @@ const defaultTasks = [
 let tasks = JSON.parse(localStorage.getItem('tasks')) || defaultTasks;
 
 // Event Listeners
-addTaskBtn.addEventListener('click', () => {
-    addTaskModal.classList.add('active');
-});
-
-cancelBtn.addEventListener('click', () => {
-    addTaskModal.classList.remove('active');
-    addTaskForm.reset();
-});
-
-addTaskForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    const title = document.getElementById('taskTitle').value;
-    const date = document.getElementById('taskDate').value;
-    const description = document.getElementById('taskDescription').value;
-    
-    const task = {
-        id: Date.now(),
-        title,
-        date,
-        description,
-        completed: false
-    };
-    
-    tasks.push(task);
-    saveTasks();
-    renderTasks();
-    
-    addTaskModal.classList.remove('active');
-    addTaskForm.reset();
-});
-
 filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         filterBtns.forEach(b => b.classList.remove('active'));
