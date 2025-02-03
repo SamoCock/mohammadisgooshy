@@ -2,170 +2,222 @@
 const tasksList = document.getElementById('tasksList');
 const filterBtns = document.querySelectorAll('.filter-btn');
 
-// Get today's date string
-const today = new Date();
-const dateString = today.toISOString().split('T')[0];
+// Current date state
+let currentDate = new Date();
+currentDate.setHours(0, 0, 0, 0);
 
-// Predefined tasks
-const defaultTasks = [
-    {
-        id: 1,
-        title: "Morning Walk with Luna 🐶",
-        date: `${dateString}T07:00`,
-        description: "Take Luna out for her morning walk",
-        completed: false
-    },
-    {
-        id: 2,
-        title: "Morning Rest 😴",
-        date: `${dateString}T07:15`,
-        description: "Sleep time (until 10:00)",
-        completed: false
-    },
-    {
-        id: 3,
-        title: "Luna's Walk 🐶",
-        date: `${dateString}T10:00`,
-        description: "Take Luna for her mid-morning walk",
-        completed: false
-    },
-    {
-        id: 4,
-        title: "Morning Routine 🍞🪥",
-        date: `${dateString}T10:15`,
-        description: "Breakfast + Make food + Dishes + Brush teeth",
-        completed: false
-    },
-    {
-        id: 5,
-        title: "Painting Session 🎨",
-        date: `${dateString}T11:15`,
-        description: "Focused painting time (with Luna's walk break at 13:00)",
-        completed: false
-    },
-    {
-        id: 6,
-        title: "Quick Luna Break 🐶",
-        date: `${dateString}T13:00`,
-        description: "Quick break from painting to take Luna out",
-        completed: false
-    },
-    {
-        id: 7,
-        title: "Afternoon Walk with Luna 🐶",
-        date: `${dateString}T15:00`,
-        description: "Take Luna for her afternoon walk",
-        completed: false
-    },
-    {
-        id: 8,
-        title: "Free Time / More Painting 🎨🎮📖",
-        date: `${dateString}T15:15`,
-        description: "Flexible time for painting, gaming, or reading",
-        completed: false
-    },
-    {
-        id: 9,
-        title: "Evening Walk with Luna 🐶",
-        date: `${dateString}T17:00`,
-        description: "Take Luna for her evening walk",
-        completed: false
-    },
-    {
-        id: 10,
-        title: "Dinner Time 🍝🪥",
-        date: `${dateString}T18:00`,
-        description: "Dinner + Make food + Dishes + Brush teeth",
-        completed: false
-    },
-    {
-        id: 11,
-        title: "Luna's Night Walk 🐶",
-        date: `${dateString}T19:00`,
-        description: "Take Luna for her post-dinner walk",
-        completed: false
-    },
-    {
-        id: 12,
-        title: "Gym Time 🏋️",
-        date: `${dateString}T19:15`,
-        description: "Workout session at the gym",
-        completed: false
-    },
-    {
-        id: 13,
-        title: "Evening Routine 🚿",
-        date: `${dateString}T21:15`,
-        description: "Shower + Wind down",
-        completed: false
-    },
-    {
-        id: 14,
-        title: "Free Time 🎮👥📖",
-        date: `${dateString}T22:00`,
-        description: "Gaming, socializing, or reading",
-        completed: false
-    },
-    {
-        id: 15,
-        title: "Last Walk with Luna 🐶",
-        date: `${dateString}T23:00`,
-        description: "Take Luna for her last walk of the day",
-        completed: false
-    },
-    {
-        id: 16,
-        title: "Wind Down Time ✨",
-        date: `${dateString}T23:15`,
-        description: "Relax and prepare for sleep",
-        completed: false
-    },
-    {
-        id: 17,
-        title: "Night Rest 😴",
-        date: `${dateString}T23:45`,
-        description: "Sleep time (until 07:00)",
-        completed: false
-    }
-];
+// Function to format date for display
+function formatDisplayDate(date) {
+    return date.toLocaleDateString('en-US', { 
+        weekday: 'long', 
+        month: 'long', 
+        day: 'numeric' 
+    });
+}
+
+// Function to create tasks for a specific date
+function createTasksForDate(date) {
+    const dateString = date.toISOString().split('T')[0];
+    return [
+        {
+            id: 1,
+            title: "Morning Walk with Luna 🐶",
+            date: `${dateString}T07:00`,
+            completed: false
+        },
+        {
+            id: 2,
+            title: "Morning Rest 😴",
+            date: `${dateString}T07:15`,
+            completed: false
+        },
+        {
+            id: 3,
+            title: "Luna's Walk 🐶",
+            date: `${dateString}T10:00`,
+            completed: false
+        },
+        {
+            id: 4,
+            title: "Morning Routine 🍞🪥",
+            date: `${dateString}T10:15`,
+            completed: false
+        },
+        {
+            id: 5,
+            title: "Painting Session 🎨",
+            date: `${dateString}T11:15`,
+            completed: false
+        },
+        {
+            id: 6,
+            title: "Quick Luna Break 🐶",
+            date: `${dateString}T13:00`,
+            completed: false
+        },
+        {
+            id: 7,
+            title: "Afternoon Walk with Luna 🐶",
+            date: `${dateString}T15:00`,
+            completed: false
+        },
+        {
+            id: 8,
+            title: "Free Time / More Painting 🎨🎮📖",
+            date: `${dateString}T15:15`,
+            completed: false
+        },
+        {
+            id: 9,
+            title: "Evening Walk with Luna 🐶",
+            date: `${dateString}T17:00`,
+            completed: false
+        },
+        {
+            id: 10,
+            title: "Dinner Time 🍝🪥",
+            date: `${dateString}T18:00`,
+            completed: false
+        },
+        {
+            id: 11,
+            title: "Luna's Night Walk 🐶",
+            date: `${dateString}T19:00`,
+            completed: false
+        },
+        {
+            id: 12,
+            title: "Gym Time 🏋️",
+            date: `${dateString}T19:15`,
+            completed: false
+        },
+        {
+            id: 13,
+            title: "Evening Routine 🚿",
+            date: `${dateString}T21:15`,
+            completed: false
+        },
+        {
+            id: 14,
+            title: "Free Time 🎮👥📖",
+            date: `${dateString}T22:00`,
+            completed: false
+        },
+        {
+            id: 15,
+            title: "Last Walk with Luna 🐶",
+            date: `${dateString}T23:00`,
+            completed: false
+        },
+        {
+            id: 16,
+            title: "Wind Down Time ✨",
+            date: `${dateString}T23:15`,
+            completed: false
+        },
+        {
+            id: 17,
+            title: "Night Rest 😴",
+            date: `${dateString}T23:45`,
+            completed: false
+        }
+    ];
+}
 
 // State
-let tasks = JSON.parse(localStorage.getItem('tasks')) || defaultTasks;
+let tasks = {};
 
-// Event Listeners
-filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        renderTasks(btn.dataset.filter);
-    });
-});
-
-// Functions
-function saveTasks() {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-}
-
-function formatDate(dateString) {
-    const options = { 
-        hour: '2-digit',
-        minute: '2-digit'
-    };
-    return new Date(dateString).toLocaleTimeString('en-US', options);
-}
-
-function renderTasks(filter = 'all') {
-    let filteredTasks = [...tasks];
-    
-    if (filter === 'today') {
-        const today = new Date().setHours(0, 0, 0, 0);
-        filteredTasks = tasks.filter(task => {
-            const taskDate = new Date(task.date).setHours(0, 0, 0, 0);
-            return taskDate === today;
-        });
+// Load tasks for current date
+function loadTasksForDate(date) {
+    const dateKey = date.toISOString().split('T')[0];
+    if (!tasks[dateKey]) {
+        const savedTasks = localStorage.getItem(`tasks_${dateKey}`);
+        tasks[dateKey] = savedTasks ? JSON.parse(savedTasks) : createTasksForDate(date);
     }
+    return tasks[dateKey];
+}
+
+// Save tasks for specific date
+function saveTasks(date) {
+    const dateKey = date.toISOString().split('T')[0];
+    localStorage.setItem(`tasks_${dateKey}`, JSON.stringify(tasks[dateKey]));
+}
+
+// Navigation functions
+function goToNextDay() {
+    currentDate.setDate(currentDate.getDate() + 1);
+    renderAll();
+}
+
+function goToPreviousDay() {
+    currentDate.setDate(currentDate.getDate() - 1);
+    renderAll();
+}
+
+// Stats calculation
+function calculateStats(tasksList) {
+    const total = tasksList.length;
+    const completed = tasksList.filter(task => task.completed).length;
+    const remaining = total - completed;
+    const percentComplete = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+    return { total, completed, remaining, percentComplete };
+}
+
+// Render functions
+function renderDateNavigation() {
+    const dateNav = document.createElement('div');
+    dateNav.className = 'date-navigation';
+    dateNav.innerHTML = `
+        <button class="date-nav-btn" onclick="goToPreviousDay()">←</button>
+        <div class="current-date">${formatDisplayDate(currentDate)}</div>
+        <button class="date-nav-btn" onclick="goToNextDay()">→</button>
+    `;
     
-    tasksList.innerHTML = filteredTasks
+    const container = document.querySelector('.app-container');
+    const existingNav = document.querySelector('.date-navigation');
+    if (existingNav) {
+        container.replaceChild(dateNav, existingNav);
+    } else {
+        container.insertBefore(dateNav, tasksList);
+    }
+}
+
+function renderStats(currentTasks) {
+    const stats = calculateStats(currentTasks);
+    const statsContainer = document.createElement('div');
+    statsContainer.className = 'stats-container';
+    statsContainer.innerHTML = `
+        <h3>Daily Progress</h3>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">${stats.completed}</div>
+                <div class="stat-label">Completed</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">${stats.remaining}</div>
+                <div class="stat-label">Remaining</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">${stats.percentComplete}%</div>
+                <div class="stat-label">Complete</div>
+            </div>
+        </div>
+    `;
+    
+    const container = document.querySelector('.app-container');
+    const existingStats = document.querySelector('.stats-container');
+    if (existingStats) {
+        container.replaceChild(statsContainer, existingStats);
+    } else {
+        container.insertBefore(statsContainer, tasksList);
+    }
+}
+
+function renderTasks() {
+    const currentTasks = loadTasksForDate(currentDate);
+    
+    tasksList.innerHTML = currentTasks
         .sort((a, b) => new Date(a.date) - new Date(b.date))
         .map(task => `
             <div class="task-item ${task.completed ? 'completed' : ''}" data-id="${task.id}">
@@ -177,20 +229,36 @@ function renderTasks(filter = 'all') {
                 <div class="task-content">
                     <h3>${task.title}</h3>
                     <div class="task-date">${formatDate(task.date)}</div>
-                    <div class="task-description">${task.description}</div>
                 </div>
             </div>
         `).join('');
+        
+    renderStats(currentTasks);
+}
+
+function renderAll() {
+    renderDateNavigation();
+    renderTasks();
 }
 
 function toggleTask(id) {
-    const task = tasks.find(t => t.id === id);
+    const currentTasks = loadTasksForDate(currentDate);
+    const task = currentTasks.find(t => t.id === id);
     if (task) {
         task.completed = !task.completed;
-        saveTasks();
-        renderTasks();
+        saveTasks(currentDate);
+        renderAll();
     }
 }
 
+// Event Listeners
+filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderAll();
+    });
+});
+
 // Initial render
-renderTasks(); 
+renderAll(); 
