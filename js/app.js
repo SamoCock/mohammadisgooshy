@@ -169,16 +169,15 @@ function renderTasks(filter = 'all') {
         .sort((a, b) => new Date(a.date) - new Date(b.date))
         .map(task => `
             <div class="task-item ${task.completed ? 'completed' : ''}" data-id="${task.id}">
-                <h3>${task.title}</h3>
-                <div class="task-date">${formatDate(task.date)}</div>
-                <div class="task-description">${task.description}</div>
-                <div class="task-actions">
-                    <button onclick="toggleTask(${task.id})" class="toggle-btn ${task.completed ? 'completed' : ''}">
-                        ${task.completed ? '✓ Done' : 'Mark Done'}
-                    </button>
-                    <button onclick="deleteTask(${task.id})" class="delete-btn">
-                        Delete
-                    </button>
+                <input type="checkbox" 
+                       class="task-checkbox" 
+                       ${task.completed ? 'checked' : ''} 
+                       onchange="toggleTask(${task.id})"
+                       aria-label="Mark task as complete">
+                <div class="task-content">
+                    <h3>${task.title}</h3>
+                    <div class="task-date">${formatDate(task.date)}</div>
+                    <div class="task-description">${task.description}</div>
                 </div>
             </div>
         `).join('');
@@ -191,12 +190,6 @@ function toggleTask(id) {
         saveTasks();
         renderTasks();
     }
-}
-
-function deleteTask(id) {
-    tasks = tasks.filter(task => task.id !== id);
-    saveTasks();
-    renderTasks();
 }
 
 // Initial render

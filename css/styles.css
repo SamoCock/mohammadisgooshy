@@ -86,23 +86,32 @@ body {
     box-shadow: 0 4px 15px var(--shadow-color);
     border: 2px solid var(--primary-pink);
     transition: transform 0.3s ease;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 15px;
+    align-items: start;
 }
 
 .task-item:hover {
     transform: translateY(-3px);
 }
 
+.task-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 .task-item h3 {
     color: var(--accent-pink);
     font-size: 20px;
     font-weight: 600;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
 }
 
 .task-date {
     color: var(--text-color);
     font-size: 14px;
-    margin-bottom: 10px;
     opacity: 0.8;
 }
 
@@ -110,62 +119,44 @@ body {
     color: var(--text-color);
     font-size: 16px;
     line-height: 1.6;
-    margin-bottom: 15px;
 }
 
-.task-actions {
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-}
-
-.toggle-btn {
-    padding: 8px 20px;
+.task-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
     border: 2px solid var(--primary-pink);
-    border-radius: 50px;
+    border-radius: 6px;
     background-color: white;
-    color: var(--accent-pink);
     cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
+    position: relative;
     transition: all 0.3s ease;
+    margin-top: 4px;
 }
 
-.toggle-btn:hover {
+.task-checkbox:checked {
     background-color: var(--primary-pink);
+    border-color: var(--primary-pink);
+}
+
+.task-checkbox:checked::before {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px var(--shadow-color);
+    font-size: 16px;
 }
 
-.toggle-btn.completed {
-    background-color: var(--primary-pink);
-    color: white;
+.task-checkbox:hover {
+    transform: scale(1.1);
+    box-shadow: 0 2px 8px var(--shadow-color);
 }
 
-.delete-btn {
-    padding: 8px 20px;
-    border: 2px solid var(--secondary-pink);
-    border-radius: 50px;
-    background-color: white;
-    color: var(--accent-pink);
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-.delete-btn:hover {
-    background-color: var(--secondary-pink);
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px var(--shadow-color);
-}
-
-.task-item.completed {
-    background-color: var(--soft-white);
-    border-color: var(--secondary-pink);
-    opacity: 0.8;
+.task-item.completed .task-content {
+    opacity: 0.7;
 }
 
 .task-item.completed h3 {
@@ -175,7 +166,6 @@ body {
 
 .task-item.completed .task-description {
     text-decoration: line-through;
-    opacity: 0.7;
 }
 
 /* Responsive Design */
