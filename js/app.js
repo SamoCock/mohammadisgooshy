@@ -248,6 +248,26 @@ function renderAll() {
     renderTasks();
 }
 
+function showLoveMessage() {
+    const existingMessage = document.querySelector('.love-message');
+    if (existingMessage) {
+        existingMessage.remove();
+    }
+
+    const message = document.createElement('div');
+    message.className = 'love-message';
+    message.innerHTML = `
+        <h2>I LOVE YOU</h2>
+        <p>✨💖✨</p>
+    `;
+    document.body.appendChild(message);
+
+    // Remove the message after animation completes
+    setTimeout(() => {
+        message.remove();
+    }, 3000);
+}
+
 function toggleTask(id) {
     const currentTasks = loadTasksForDate(currentDate);
     const task = currentTasks.find(t => t.id === id);
@@ -255,6 +275,12 @@ function toggleTask(id) {
         task.completed = !task.completed;
         saveTasks(currentDate);
         renderAll();
+
+        // Check if all tasks are completed
+        const allCompleted = currentTasks.every(t => t.completed);
+        if (allCompleted) {
+            showLoveMessage();
+        }
     }
 }
 
