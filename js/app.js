@@ -170,7 +170,6 @@ function calculateStats(tasksList) {
     const completed = tasksList.filter(task => task.completed).length;
     const remaining = total - completed;
     const percentComplete = total > 0 ? Math.round((completed / total) * 100) : 0;
-
     return { total, completed, remaining, percentComplete };
 }
 
@@ -189,7 +188,7 @@ function renderDateNavigation() {
     if (existingNav) {
         container.replaceChild(dateNav, existingNav);
     } else {
-        container.insertBefore(dateNav, tasksList);
+        container.insertBefore(dateNav, document.querySelector('.schedule-filters'));
     }
 }
 
@@ -220,7 +219,7 @@ function renderStats(currentTasks) {
     if (existingStats) {
         container.replaceChild(statsContainer, existingStats);
     } else {
-        container.insertBefore(statsContainer, tasksList);
+        container.insertBefore(statsContainer, document.querySelector('.schedule-filters'));
     }
 }
 
@@ -242,12 +241,11 @@ function renderTasks() {
                 </div>
             </div>
         `).join('');
-        
-    renderStats(currentTasks);
 }
 
 function renderAll() {
     renderDateNavigation();
+    renderStats(loadTasksForDate(currentDate));
     renderTasks();
 }
 
@@ -270,5 +268,7 @@ filterBtns.forEach(btn => {
     });
 });
 
-// Initial render
-renderAll(); 
+// Make sure DOM is loaded before rendering
+document.addEventListener('DOMContentLoaded', () => {
+    renderAll();
+}); 
