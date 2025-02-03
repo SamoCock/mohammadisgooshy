@@ -15,6 +15,16 @@ function formatDisplayDate(date) {
     });
 }
 
+// Function to format time
+function formatDate(dateString) {
+    const options = { 
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+    };
+    return new Date(dateString).toLocaleTimeString('en-US', options);
+}
+
 // Function to create tasks for a specific date
 function createTasksForDate(date) {
     const dateString = date.toISOString().split('T')[0];
