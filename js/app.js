@@ -1,6 +1,5 @@
 // DOM Elements
 const tasksList = document.getElementById('tasksList');
-const filterBtns = document.querySelectorAll('.filter-btn');
 
 // Current date state
 let currentDate = new Date();
@@ -188,7 +187,7 @@ function renderDateNavigation() {
     if (existingNav) {
         container.replaceChild(dateNav, existingNav);
     } else {
-        container.insertBefore(dateNav, document.querySelector('.schedule-filters'));
+        container.insertBefore(dateNav, tasksList);
     }
 }
 
@@ -219,7 +218,7 @@ function renderStats(currentTasks) {
     if (existingStats) {
         container.replaceChild(statsContainer, existingStats);
     } else {
-        container.insertBefore(statsContainer, document.querySelector('.schedule-filters'));
+        container.insertBefore(statsContainer, tasksList);
     }
 }
 
@@ -258,15 +257,6 @@ function toggleTask(id) {
         renderAll();
     }
 }
-
-// Event Listeners
-filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        renderAll();
-    });
-});
 
 // Make sure DOM is loaded before rendering
 document.addEventListener('DOMContentLoaded', () => {
