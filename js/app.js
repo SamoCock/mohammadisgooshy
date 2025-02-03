@@ -6,30 +6,121 @@ const filterBtns = document.querySelectorAll('.filter-btn');
 const defaultTasks = [
     {
         id: 1,
-        title: "Morning Skincare Routine ✨",
-        date: "2024-02-01T08:00",
-        description: "Cleanse, tone, moisturize, and sunscreen",
+        title: "Morning Walk with Luna 🐶",
+        date: "2024-02-01T07:00",
+        description: "Take Luna out for her morning walk",
         completed: false
     },
     {
         id: 2,
-        title: "Study Session 📚",
-        date: "2024-02-01T10:00",
-        description: "Review notes and complete assignments",
+        title: "Morning Rest 😴",
+        date: "2024-02-01T07:15",
+        description: "Sleep time (until 10:00)",
         completed: false
     },
     {
         id: 3,
-        title: "Afternoon Tea Break 🫖",
-        date: "2024-02-01T15:00",
-        description: "Take a relaxing break with tea and snacks",
+        title: "Luna's Walk 🐶",
+        date: "2024-02-01T10:00",
+        description: "Take Luna for her mid-morning walk",
         completed: false
     },
     {
         id: 4,
-        title: "Evening Walk 🌸",
+        title: "Morning Routine 🍞🪥",
+        date: "2024-02-01T10:15",
+        description: "Breakfast + Make food + Dishes + Brush teeth",
+        completed: false
+    },
+    {
+        id: 5,
+        title: "Painting Session 🎨",
+        date: "2024-02-01T11:15",
+        description: "Focused painting time (with Luna's walk break at 13:00)",
+        completed: false
+    },
+    {
+        id: 6,
+        title: "Quick Luna Break 🐶",
+        date: "2024-02-01T13:00",
+        description: "Quick break from painting to take Luna out",
+        completed: false
+    },
+    {
+        id: 7,
+        title: "Afternoon Walk with Luna 🐶",
+        date: "2024-02-01T15:00",
+        description: "Take Luna for her afternoon walk",
+        completed: false
+    },
+    {
+        id: 8,
+        title: "Free Time / More Painting 🎨🎮📖",
+        date: "2024-02-01T15:15",
+        description: "Flexible time for painting, gaming, or reading",
+        completed: false
+    },
+    {
+        id: 9,
+        title: "Evening Walk with Luna 🐶",
+        date: "2024-02-01T17:00",
+        description: "Take Luna for her evening walk",
+        completed: false
+    },
+    {
+        id: 10,
+        title: "Dinner Time 🍝🪥",
         date: "2024-02-01T18:00",
-        description: "30-minute walk in the park",
+        description: "Dinner + Make food + Dishes + Brush teeth",
+        completed: false
+    },
+    {
+        id: 11,
+        title: "Luna's Night Walk 🐶",
+        date: "2024-02-01T19:00",
+        description: "Take Luna for her post-dinner walk",
+        completed: false
+    },
+    {
+        id: 12,
+        title: "Gym Time 🏋️",
+        date: "2024-02-01T19:15",
+        description: "Workout session at the gym",
+        completed: false
+    },
+    {
+        id: 13,
+        title: "Evening Routine 🚿",
+        date: "2024-02-01T21:15",
+        description: "Shower + Wind down",
+        completed: false
+    },
+    {
+        id: 14,
+        title: "Free Time 🎮👥📖",
+        date: "2024-02-01T22:00",
+        description: "Gaming, socializing, or reading",
+        completed: false
+    },
+    {
+        id: 15,
+        title: "Last Walk with Luna 🐶",
+        date: "2024-02-01T23:00",
+        description: "Take Luna for her last walk of the day",
+        completed: false
+    },
+    {
+        id: 16,
+        title: "Wind Down Time ✨",
+        date: "2024-02-01T23:15",
+        description: "Relax and prepare for sleep",
+        completed: false
+    },
+    {
+        id: 17,
+        title: "Night Rest 😴",
+        date: "2024-02-01T23:45",
+        description: "Sleep time (until 07:00)",
         completed: false
     }
 ];
